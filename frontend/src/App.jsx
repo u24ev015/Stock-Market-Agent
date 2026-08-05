@@ -48,6 +48,14 @@ function App() {
         {loading ? "Processing..." : "Ask AI"}
       </button>
 
+          {/* Display Error */}
+    {response && response.error && (
+      <div className="mt-4 p-3 bg-red-100 text-red-700 shadow rounded w-80">
+        <strong>Error:</strong>
+        <p>{response.error}</p>
+      </div>
+    )}
+
       {/* Display General Recommendation */}
       {response && response.recommendation !== "RANGE" && response.recommendation !== "COMPARE" && (
         <div className={`mt-4 p-3 text-white shadow rounded w-80 ${getBoxColor()}`}>
