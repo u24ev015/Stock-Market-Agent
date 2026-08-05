@@ -12,7 +12,7 @@ function App() {
     setResponse(null);
 
     try {
-      const res = await axios.post("http://127.0.0.1:5000/ask_agent", { query });
+      const res = await axios.post("https://stock-market-agent-gk2p.onrender.com/ask_agent", { query });
       setResponse(res.data);
     } catch (error) {
       setResponse({ recommendation: "ERROR", reason: "Could not fetch data." });
