@@ -12,11 +12,26 @@ function App() {
     setResponse(null);
 
     try {
-      const res = await axios.post("https://stock-market-agent-gk2p.onrender.com/ask_agent", { query });
-      setResponse(res.data);
-    } catch (error) {
-      setResponse({ recommendation: "ERROR", reason: "Could not fetch data." });
-    }
+  const res = await axios.post(
+    "https://stock-market-agent-gk2p.onrender.com/ask_agent",
+    { query }
+  );
+  setResponse(res.data);
+} catch (error) {
+  console.log(error);
+  console.log(error.response);
+  console.log(error.message);
+
+  if (error.response) {
+    setResponse({
+      error: JSON.stringify(error.response.data),
+    });
+  } else {
+    setResponse({
+      error: error.message,
+    });
+  }
+}
     setLoading(false);
   };
 
