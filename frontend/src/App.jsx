@@ -18,19 +18,12 @@ function App() {
   );
   setResponse(res.data);
 } catch (error) {
-  console.log(error);
-  console.log(error.response);
-  console.log(error.message);
-
-  if (error.response) {
-    setResponse({
-      error: JSON.stringify(error.response.data),
-    });
-  } else {
-    setResponse({
-      error: error.message,
-    });
-  }
+  setResponse(
+    error.response?.data || {
+      recommendation: "ERROR",
+      reason: "Could not fetch data.",
+    }
+  );
 }
     setLoading(false);
   };
@@ -62,14 +55,6 @@ function App() {
       >
         {loading ? "Processing..." : "Ask AI"}
       </button>
-
-          {/* Display Error */}
-    {response && response.error && (
-      <div className="mt-4 p-3 bg-red-100 text-red-700 shadow rounded w-80">
-        <strong>Error:</strong>
-        <p>{response.error}</p>
-      </div>
-    )}
 
       {/* Display General Recommendation */}
       {response && response.recommendation !== "RANGE" && response.recommendation !== "COMPARE" && (
